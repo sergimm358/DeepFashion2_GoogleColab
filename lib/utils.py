@@ -199,8 +199,8 @@ def box_refinement_graph(box, gt_box):
 
     dy = (gt_center_y - center_y) / height
     dx = (gt_center_x - center_x) / width
-    dh = tf.log(gt_height / height)
-    dw = tf.log(gt_width / width)
+    dh = tf.math.log(gt_height / height)
+    dw = tf.math.log(gt_width / width)
 
     result = tf.stack([dy, dx, dh, dw], axis=1)
     return result
@@ -512,29 +512,6 @@ def resize_mask(mask, scale, padding, crop=None):
     else:
         mask = np.pad(mask, padding, mode='constant', constant_values=0)
     return mask
-
-def resize_keypoints(keypoints, scale, padding, crop=None):
-    """
-    """
-    points_lst = []
-    for idx in range(keypoints.shape[1]):
-        keypoint = keypoints[:, idx]
-        landmark = keypoint.reshape(-1, 3)
-        landmark[:, :2] = landmark[:, :2] * scale
-        
-        if crop is not None:
-            y, x, h, w = crop
-            landmark[:, 0] = landmark[:, 0] - y
-            landmark[:, 1] = landmark[:, 1] - x
-
-        if padding is not None:
-            (x1, x2), (y1, y2), _ = padding
-            landmark[:, 0] = landmark[:, 0] + x1
-            landmark[:, 1] = landmark[:, 1] + y1
-
-        points_lst.append(landmark.reshape(-1))
-    
-    return np.stack(points_lst, axis=1)
 
 
 def minimize_mask(bbox, mask, mini_shape):

@@ -27,7 +27,7 @@ class DeepFashion2Config(Config):
 
     # We use a GPU with 12GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = 1
 
     # Uncomment to train on 8 GPUs (default is 1)
     #GPU_COUNT = 4
@@ -37,10 +37,15 @@ class DeepFashion2Config(Config):
     
     USE_MINI_MASK = True
 
-    train_img_dir = "/content/Deepfashion2_Training/dataset/train/image"
-    train_json_path = "/content/Deepfashion2_Training/dataset/train/train.json"
-    valid_img_dir = "/content/Deepfashion2_Training/dataset/validation/image"
-    valid_json_path = "/content/Deepfashion2_Training/dataset/train/val.json"
+    #train_img_dir = "/content/DeepFashion2_Training/dataset/train/image"
+    #train_json_path = "/content/DeepFashion2_Training/dataset/train/train.json"
+    #valid_img_dir = "/content/DeepFashion2_Training/dataset/validation/image"
+    #valid_json_path = "/content/DeepFashion2_Training/dataset/train/val.json"
+
+    train_img_dir = "./dataset/train/image"
+    train_json_path = "./dataset/train/train.json"
+    valid_img_dir = "./dataset/validation/image"
+    valid_json_path = "./dataset/validation/val.json"
 
 
 ############################################################
